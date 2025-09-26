@@ -8,6 +8,9 @@ const initialState: TasksState = {}
 export const createTaskAC = createAction('tasks/createTask', (title: string, todolistId: string) => {
     return {payload: {title, id: nanoid(), todolistId}}
 })
+export const deleteTaskAC= createAction('tasks/deleteTask', (todolistId: string, taskId: string)=>{
+    return {payload:{todolistId, taskId}}
+})
 export const tasksReducer = createReducer(initialState, builder => {
     builder
         .addCase(deleteTodolistAC, (state, action) => {
@@ -19,6 +22,14 @@ export const tasksReducer = createReducer(initialState, builder => {
         .addCase(createTaskAC,(state, action)=>{
 
             state[action.payload.todolistId].push({id: nanoid(), title:action.payload.title, isDone: false})
+
+        })
+        .addCase(deleteTaskAC,(state, action)=>{
+            const taskId=action.payload.taskId
+
+            const index=    state[action.payload.todolistId].findIndex(task=>task.id===action.payload.taskId)
+            if (index!=-1)  state[action.payload.todolistId].splice(index,1)
+            debugger
 
         })
 
@@ -62,10 +73,10 @@ export const tasksReducer2 = (state: TasksState = initialState, action: Actions)
             return state
     }
 }
-
-export const deleteTaskAC = (payload: { todolistId: string, taskId: string }) => {
-    return {type: 'delete_task', payload} as const
-}
+//
+// export const deleteTaskAC = (payload: { todolistId: string, taskId: string }) => {
+//     return {type: 'delete_task', payload} as const
+// }
 //
 // export const createTaskAC = (payload: { todolistId: string, title: string }) => {
 //     return {type: 'create_task', payload} as const

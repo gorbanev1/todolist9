@@ -91,7 +91,7 @@ export const App = () => {
   }
 
   const deleteTask = (todolistId: string, taskId: string) => {
-    dispatch(deleteTaskAC({todolistId, taskId}))
+    dispatch(deleteTaskAC(todolistId, taskId))
   }
 
   const createTask = (todolistId: string, title: string) => {
