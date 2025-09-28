@@ -74,7 +74,9 @@ export const TodolistItem = (props: Props) => {
 
                 const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
                   const newStatusValue = e.currentTarget.checked
+
                   changeTaskStatus(id, task.id, newStatusValue)
+
                 }
 
                 const changeTaskTitleHandler = (title: string) => {
